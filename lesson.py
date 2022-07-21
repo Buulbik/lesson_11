@@ -145,48 +145,92 @@
 #
 # collect_the_bag()
 
-lowercase_letters = list("abcdefghijklmnopqrstuvwxyz")
-uppercase_letters = tuple("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-digits = tuple("0123456789")
-symbols = tuple("*-#")
-errors = {
-    'short': "Пароль должен быть не короче 8 символов",
-    'long': "Пароль должен быть не длинее 12 символов",
-    'uppercase': "В пароле должны быть буквы вверхнего регистра",
-    'lowercase': "В пароле должны быть буквы нижнего регистра",
-    'digits': f"В пароле должны быть цифры {digits}",
-    'symbols': f"В пароле должны быть символы {symbols}"
-}
+# lowercase_letters = list("abcdefghijklmnopqrstuvwxyz")
+# uppercase_letters = tuple("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+# digits = tuple("0123456789")
+# symbols = tuple("*-#")
+# errors = {
+#     'short': "Пароль должен быть не короче 8 символов",
+#     'long': "Пароль должен быть не длинее 12 символов",
+#     'uppercase': "В пароле должны быть буквы вверхнего регистра",
+#     'lowercase': "В пароле должны быть буквы нижнего регистра",
+#     'digits': f"В пароле должны быть цифры {digits}",
+#     'symbols': f"В пароле должны быть символы {symbols}"
+# }
+#
+# for a, b in errors.items():
+#     print(b)
+#
+#
+# password = input('Введите пароль: ')
+#
+#
+# if 8 <= len(password) <= 12:
+#     errors.pop('short')
+#     errors.pop('long')
+# elif len(password) > 12:
+#     errors.pop('short')
+# elif len(password) < 8:
+#     errors.pop('long')
+#
+#
+# for let in password:
+#     if let in lowercase_letters:
+#         errors.pop('lowercase', None)
+#     if let in uppercase_letters:
+#         errors.pop('uppercase', None)
+#     if let in digits:
+#         errors.pop('digits', None)
+#     if let in symbols:
+#         errors.pop('symbols', None)
+#
+#
+# if errors:
+#     for a, b in errors.items():
+#         print(f"!ERROR! {b} !ERROR!")
+# else:
+#     print('Пароль идеален ( ･_･)♡')
 
-for a, b in errors.items():
-    print(b)
+def memoize_func(func):
+    from datetime import datetime
+
+    def wrapper(a, b):
+        start_time = datetime.now()
+        func(a, b)
+        end_time = datetime.now()
+        print(f"[*] Время выполнения: {end_time - start_time} секунд.")
+
+    return wrapper
 
 
-password = input('Введите пароль: ')
+def lines(func):
+    def inner(*args):
+        func(*args)
+        print('-' * 60)
+
+    return inner
 
 
-if 8 <= len(password) <= 12:
-    errors.pop('short')
-    errors.pop('long')
-elif len(password) > 12:
-    errors.pop('short')
-elif len(password) < 8:
-    errors.pop('long')
+zero = 0
 
 
-for let in password:
-    if let in lowercase_letters:
-        errors.pop('lowercase', None)
-    if let in uppercase_letters:
-        errors.pop('uppercase', None)
-    if let in digits:
-        errors.pop('digits', None)
-    if let in symbols:
-        errors.pop('symbols', None)
+@lines
+@memoize_func
+def numbers_sum(a, b):
+    for number in list(range(a, b)):
+        number += zero
+    print(f"Аргументы: {a, b}\n{number}")
+    return zero
 
 
-if errors:
-    for a, b in errors.items():
-        print(f"!ERROR! {b} !ERROR!")
-else:
-    print('Пароль идеален ( ･_･)♡')
+numbers_sum(3, 1000005)
+numbers_sum(3, 1000005)
+numbers_sum(3, 1000004)
+numbers_sum(3, 1000002)
+numbers_sum(3, 1000005)
+numbers_sum(3, 1000003)
+numbers_sum(3, 1000004)
+numbers_sum(3, 1000005)
+numbers_sum(3, 1000007)
+numbers_sum(3, 1000008)
+numbers_sum(3, 1000007)
