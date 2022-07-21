@@ -191,46 +191,46 @@
 # else:
 #     print('Пароль идеален ( ･_･)♡')
 
-def memoize_func(func):
-    from datetime import datetime
-
-    def wrapper(a, b):
-        start_time = datetime.now()
-        func(a, b)
-        end_time = datetime.now()
-        print(f"[*] Время выполнения: {end_time - start_time} секунд.")
-
-    return wrapper
-
-
-def lines(func):
-    def inner(*args):
-        func(*args)
-        print('-' * 60)
-
-    return inner
-
-
-zero = 0
-
-
-@lines
-@memoize_func
-def numbers_sum(a, b):
-    for number in list(range(a, b)):
-        number += zero
-    print(f"Аргументы: {a, b}\n{number}")
-    return zero
-
-
-numbers_sum(3, 1000005)
-numbers_sum(3, 1000005)
-numbers_sum(3, 1000004)
-numbers_sum(3, 1000002)
-numbers_sum(3, 1000005)
-numbers_sum(3, 1000003)
-numbers_sum(3, 1000004)
-numbers_sum(3, 1000005)
-numbers_sum(3, 1000007)
-numbers_sum(3, 1000008)
-numbers_sum(3, 1000007)
+# def memoize_func(func):
+#     from datetime import datetime
+#
+#     def wrapper(a, b):
+#         start_time = datetime.now()
+#         func(a, b)
+#         end_time = datetime.now()
+#         print(f"[*] Время выполнения: {end_time - start_time} секунд.")
+#
+#     return wrapper
+#
+#
+# def lines(func):
+#     def inner(*args):
+#         func(*args)
+#         print('-' * 60)
+#
+#     return inner
+#
+#
+# zero = 0
+#
+#
+# @lines
+# @memoize_func
+# def numbers_sum(a, b):
+#     for number in list(range(a, b)):
+#         number += zero
+#     print(f"Аргументы: {a, b}\n{number}")
+#     return zero
+#
+#
+# numbers_sum(3, 1000005)
+# numbers_sum(3, 1000005)
+# numbers_sum(3, 1000004)
+# numbers_sum(3, 1000002)
+# numbers_sum(3, 1000005)
+# numbers_sum(3, 1000003)
+# numbers_sum(3, 1000004)
+# numbers_sum(3, 1000005)
+# numbers_sum(3, 1000007)
+# numbers_sum(3, 1000008)
+# numbers_sum(3, 1000007)
